@@ -1,5 +1,5 @@
-# React_FinalProject
-Final project for UW Quarter 2 Javascript class
+# React - Final Project
+### Description and plan for final project for UW Quarter 2 Javascript class
 
 ## Elevator Pitch
 I'm hoping to take the idea from my final project from last quarter, re-write it in React, and build upon it to add additional functionality.  The idea is to create a Flashcard game to allow me (and others) to keep a list of Spanish words, phrases or expressions, and to allow for practice through the use of a game.  The game will use Firebase authentication using the Google and perhaps Facebook providers.  Once logged in, a user can choose to manage a personal list of expressions on a screen with basic CRUD operations using a Firebase database.  The user can then choose to play the game.  Each round will last 30 seconds, with time remaining displayed in a timer component.  Three entries from the list will be presented at random, with one entry matching to the answer card.  The user then chooses which card is the match, and is either awarded a point for guessing correctly or the correct answer is shown and no point is awarded.  At the end of 30 seconds, a Game Over page will be displayed along with the final score.  The program will also keep track of score history for each player.  Scores and lists will be private to each user, so there will be no sharing.
