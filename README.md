@@ -48,6 +48,9 @@ The following dependencies will be used in this project:
 *	Create Scores component and display previous scores for user
 *	Create Gave Over page
 *	Create timer component that redirects to Game Over page when time is up
+*	Learn about hosting and deploying projects
+*	Decide on hosting provider
+*	Deploy
 
 ## Plan
 **Week 1** – identify all components and create the database schema to support the project.  Create the header component that calls the OpenWeather API to display the weather.  Create integration with Google Authentication (saving Facebook for later, if time allows).
