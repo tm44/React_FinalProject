@@ -10,6 +10,21 @@ If I run short on time, the plan is to at least create the list management page 
 ## Wireframes
 The following are basic wireframes of the game that show the basic components on each page. Not intended to show exactly styles, but rather to identify the elements that will be present on each page.
 
+### Sign In page:
+![Sign In page](./wireframes/SignIn.png)
+---
+### Main Menu page
+![Main Menu page](./wireframes/MainMenu.png)
+---
+### Manage List page
+![Manage List page](./wireframes/ManageList.png)
+---
+### Game page
+![Game page](./wireframes/Game.png)
+---
+### Game Over page
+![Game Over page](./wireframes/GameOver.png)
+
 ## Dependencies
 The following dependencies will be used in this project:
 *	React (dom, router, proptypes, etc)
