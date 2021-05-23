@@ -53,10 +53,10 @@ The following dependencies will be used in this project:
 *	Deploy
 
 ## Plan
-**Week 1** – identify all components and create the database schema to support the project.  Create the header component that calls the OpenWeather API to display the weather.  Create integration with Google Authentication (saving Facebook for later, if time allows).
+**Week 1** – Identify all components and create the database schema to support the project.  Create basic pages that simply show the page name, and setup the react router.  Create the header component that calls the OpenWeather API to display the weather.  Create integration with Google Authentication (saving Facebook for later, if time allows).
 Create a basic shell for each page/component and set up the react routing to allow navigation to each page as appropriate, requiring a user to be authenticated for all pages expect for the Sign In page.
 
-**Week 2** – create the CRUD page for managing the list of expressions and translations.  Create the basic game board and display three random cards from the list of expressions in the Firebase database.  Create the timer component that will redirect to the Game Over page after 30 seconds.
+**Week 2** – Create the CRUD page for managing the list of expressions and translations.  Create the basic game board and display three random cards from the list of expressions in the Firebase database.  Create the timer component that will redirect to the Game Over page after 30 seconds.
 
 **Week 3** - Create the main portion of the game.  Keep track of score and display next round of questions after a user clicks on a card.  Polish the styling of the game and work out any remaining bugs.
 
