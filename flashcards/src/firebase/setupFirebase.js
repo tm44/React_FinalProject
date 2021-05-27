@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 // Required for side-effects
 import 'firebase/firestore';
 
