@@ -76,6 +76,13 @@ export default function Game() {
         }
     }
 
+    function onCardClick(answerId){
+        if (answerId === currentAnswer.id)
+            console.log('Correct!');
+        else
+            console.log('Wrong');
+    }
+
     return (
         <Container>
             {loading && <span>Loading...</span>}
@@ -83,13 +90,13 @@ export default function Game() {
                 <>
                 <Row>
                 <Col>
-                    <Flashcard text={currentOptions[0].english} />
+                    <Flashcard onCardClick={onCardClick} optionId={currentOptions[0].id} text={currentOptions[0].english} />
                 </Col>
                 <Col>
-                    <Flashcard text={currentOptions[1].english} />
+                <Flashcard onCardClick={onCardClick} optionId={currentOptions[1].id} text={currentOptions[1].english} />
                 </Col>
                 <Col>
-                    <Flashcard text={currentOptions[2].english} />
+                <Flashcard onCardClick={onCardClick} optionId={currentOptions[2].id} text={currentOptions[2].english} />
                 </Col>                                        
             </Row>
             <Row className="pt-5">
