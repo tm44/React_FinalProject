@@ -4,7 +4,6 @@ import { useAuth } from '../contexts/AuthContext';
 export default function CurrentUser() {
 
     const { currentUser } = useAuth();
-    console.log(currentUser);
 
     return (
         <div>

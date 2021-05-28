@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import SignUp from './components/signUp';
 import MainMenu from './components/mainMenu';
-import Game from './components/game';
+import Game from './components/Game';
 import GameOver from './components/gameOver';
 import ManageList from './components/ManageList';
 import TopBanner from './components/TopBanner';
@@ -19,7 +19,7 @@ function App() {
       {/* <Container className="d-flex align-items-center justify-content-center" style={{minHeight: '100vh'}}> */}
         <TopBanner />
         <Router>
-          
+          <Container>
             <Switch>
               <PrivateRoute exact path="/" component={MainMenu} />
               <Route path="/signup" component={SignUp} />
@@ -29,7 +29,7 @@ function App() {
               <PrivateRoute path="/gameover" component={GameOver} />
               <PrivateRoute path="/list" component={ManageList} />
             </Switch>
-          
+            </Container>
         </Router>
         {/* </Container> */}
         </AuthProvider> 

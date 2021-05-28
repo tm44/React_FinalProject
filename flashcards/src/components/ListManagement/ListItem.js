@@ -1,21 +1,16 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import {Button } from 'react-bootstrap';
 
-export default function ListItem({source, target, itemId, onEdit}) {
+export default function ListItem({english, spanish, itemId, onEdit, onDelete}) {
 
     return (
-        <div className="row">
-            <div className="col-sm-4">
-                {source}
-            </div>
-            <div className="col-sm-4">
-                {target}
-            </div>
-            <div className="col-sm-4">
-                <Button id={itemId} onClick={() => onEdit(itemId)} variant="link">Edit</Button>
-                {/* <Button onClick={() => {console.log(id)}} variant="link">Edit</Button> */}
-                <Button variant="link">Delete</Button>
-            </div>
-        </div>
+        <tr>
+            <td>{english}</td>
+            <td>{spanish}</td>
+            <td>
+                <Button onClick={() => onEdit(itemId)} variant="link">Edit</Button>
+                <Button onClick={() => onDelete(itemId)} variant="link">Delete</Button>
+            </td>
+        </tr>
     )
 }

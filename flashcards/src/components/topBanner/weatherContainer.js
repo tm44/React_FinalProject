@@ -8,7 +8,7 @@ export default function WeatherContainer(props)  {
     const [loading, setLoading] = useState(true);
 
     const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-console.log('apiKey is ' + apiKey);
+
     useEffect(() => {
         setLoading(true);
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${weatherCity}&units=imperial&appid=${apiKey}`;

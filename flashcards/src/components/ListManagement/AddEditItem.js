@@ -1,17 +1,19 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-export default function AddEditItem({source, target, onChangeSource, onChangeTarget, onSave, id}) {
+export default function AddEditItem({english, spanish, onChangeEnglish, onChangeSpanish, onSave, disabled, id}) {
 
     return (
         <>
         <div>
-            <input onChange={onChangeSource} type="text" value={source || ''} />
+            <label>English:</label>
+            <input onChange={onChangeEnglish} type="text" value={english || ''} />
         </div>
         <div>
-            <input onChange={onChangeTarget} type="text" value={target || ''} />
+            <label>Spanish:</label>
+            <input onChange={onChangeSpanish} type="text" value={spanish || ''} />
         </div>
-        <Button onClick={onSave}>Save</Button>
+        <Button disabled={disabled} onClick={onSave}>Save</Button>
         </>
     )
 }

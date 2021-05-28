@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ListItem from './ListManagement/ListItem';
-import { Container, Row } from 'react-bootstrap';
+import { Table, Container, Row } from 'react-bootstrap';
 import db from '../firebase/db';
 import { useAuth } from '../contexts/AuthContext';
 import AddEditItem from './ListManagement/AddEditItem';
@@ -17,6 +17,7 @@ export default function ManageList() {
             .doc(currentUser.email)
             //.doc('test@test.com')
             .collection('phrases')
+            .orderBy('createDate', 'desc')
             .onSnapshot((data) => {
                 const phrases = data.docs.map(doc => {
                     return {
@@ -24,8 +25,6 @@ export default function ManageList() {
                         ...doc.data()
                     }
                 });
-                console.log('phrases');
-                console.log(phrases);
                 setList(phrases);
             });
 
@@ -36,26 +35,34 @@ export default function ManageList() {
         const phrase = list.find(l => l.id === id);
         setSelectedItem({
             id: phrase.id,
-            source: phrase.sourceLanguage,
-            target: phrase.targetLanguage
+            english: phrase.english,
+            spanish: phrase.spanish
         });
     }
 
-    function handleChangeSource(e) {
+    function handleChangeEnglish(e) {
         setSelectedItem({
             id: selectedItem.id,
-            source: e.target.value,
-            target: selectedItem.target
+            english: e.target.value,
+            spanish: selectedItem.spanish
         })
     }
 
-    function handleChangeTarget(e) {
+    function handleChangeSpanish(e) {
         setSelectedItem({
             id: selectedItem.id,
-            source: selectedItem.source,
-            target: e.target.value
+            english: selectedItem.english,
+            spanish: e.target.value
         })
     }   
+
+    function handleDelete(id) {
+        db.collection('users')
+            .doc(currentUser.email)
+            .collection('phrases')
+            .doc(id)
+            .delete();
+    }
     
     function handleSave() {
         if (!selectedItem.id || selectedItem.id === 0) {
@@ -63,25 +70,36 @@ export default function ManageList() {
                 .doc(currentUser.email)
                 .collection('phrases')
                 .add({
-                    sourceLanguage: selectedItem.source,
-                    targetLanguage: selectedItem.target,
+                    english: selectedItem.english,
+                    spanish: selectedItem.spanish,
                     createDate: new Date()
-                });
+                })
+                .then(() => {
+                    setSelectedItem({
+                        id: 0,
+                        english: '',
+                        spanish: ''
+                    });
+                })
+                .catch((e) => {
+                    console.log('an error occurred:');
+                    console.log(e);
+                });                
         }
         else {
         db.collection('users')
             .doc(currentUser.email)
             .collection('phrases')
             .doc(selectedItem.id)
-            .set( {
-                sourceLanguage: selectedItem.source,
-                targetLanguage: selectedItem.target
-            })
+            .set({
+                english: selectedItem.english,
+                spanish: selectedItem.spanish
+            }, { merge: true })
             .then(() => {
                 setSelectedItem({
                     id: 0,
-                    source: '',
-                    target: ''
+                    english: '',
+                    spanish: ''
                 });
             })
             .catch((e) => {
@@ -91,39 +109,55 @@ export default function ManageList() {
         }
     }
 
-    console.log('list:');
-    console.log(list);
     return (
         <div>
             <h1>Manage the list</h1>
-            {list.length === 0 && <span>No items</span>}
-            {list.length > 0 && (
+            {list.length === 0 && <span>No items yet!  Add at least three items to the list to play the game.</span>}
+
             <Container>
             <Row>
                 <div className="col-sm-8">
-                    {list.map(item => (
-                        <ListItem
-                            key={item.id}
-                            itemId={item.id}
-                            onEdit={handleEdit}
-                            source={item.sourceLanguage}
-                            target={item.targetLanguage}
-                        />
-                    ))}
+                    <Table striped bordered hover size="sm">
+                        <thead>
+                            <th>English</th>
+                            <th>Spanish</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                        {list.length > 0 && (
+                        list.map(item => (
+                            <ListItem
+                                key={item.id}
+                                itemId={item.id}
+                                onEdit={handleEdit}
+                                onDelete={handleDelete}
+                                english={item.english}
+                                spanish={item.spanish}
+                            />
+                        ))
+                    )}
+                        </tbody>
+                    </Table>
                 </div>
                 <div className="col-sm-4">
                     <AddEditItem
-                        source={selectedItem.source}
-                        target={selectedItem.target}
+                        english={selectedItem.english}
+                        spanish={selectedItem.spanish}
                         id={selectedItem.id}
-                        onChangeSource={handleChangeSource}
-                        onChangeTarget={handleChangeTarget}
+                        onChangeEnglish={handleChangeEnglish}
+                        onChangeSpanish={handleChangeSpanish}
                         onSave={handleSave}
+                        disabled={
+                            !selectedItem
+                            || !selectedItem.english
+                            || !selectedItem.spanish
+                            || selectedItem.english.length === 0
+                            || selectedItem.spanish.length === 0
+                        }
                     />
                 </div>
             </Row>
         </Container>
-            )}
         </div>
     );
 }
