@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import {Container, Row, Col } from 'react-bootstrap';
 import Flashcard from './game/Flashcard';
 import db from '../firebase/db';
 import { useAuth } from '../contexts/AuthContext';
+import Timer from './game/Timer';
 
 export default function Game() {
+    const history = useHistory();
+    const timerRef = useRef(null);
     const { currentUser } = useAuth();
     const [loading, setLoading] = useState(true);
     const [currentRound, setCurrentRound] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState({});
     const [currentOptions, setCurrentOptions] = useState([]);
+    //const [timeLeft, setTimeLeft] = useState(30);
     let answerIndex = -1;
     let options = [];
     const list = [];
 
     useEffect(() => {
+        console.log('use effect is running');
         const unregisterAuthObserver = db.collection('users')
             .doc(currentUser.email)
             .collection('phrases')
@@ -30,6 +36,7 @@ export default function Game() {
                 });
                 startGame();
                 setLoading(false);
+                timerRef.current.startTimer();
             })
             .catch((e) => {
                 console.log(e);
@@ -83,23 +90,37 @@ export default function Game() {
             console.log('Wrong');
     }
 
+    function onTimerExpired() {
+        console.log('Game over!');
+        history.push('/gameover');
+    }
+
     return (
         <Container>
             {loading && <span>Loading...</span>}
             {!loading && (
                 <>
-                <Row>
+                    <Row className="pt-4">
+                <Col className="col-sm-9 text-center">
+            <Timer onTimerExpired={onTimerExpired} ref={timerRef} />
+            </Col>
+            <Col className="col-sm-3 text-center">
+            Current score: <span id="current-score">0</span> / <span id="questions-asked">0</span>
+            </Col>
+
+        </Row>
+            <Row className="pt-4">
                 <Col>
                     <Flashcard onCardClick={onCardClick} optionId={currentOptions[0].id} text={currentOptions[0].english} />
                 </Col>
                 <Col>
-                <Flashcard onCardClick={onCardClick} optionId={currentOptions[1].id} text={currentOptions[1].english} />
+                    <Flashcard onCardClick={onCardClick} optionId={currentOptions[1].id} text={currentOptions[1].english} />
                 </Col>
                 <Col>
-                <Flashcard onCardClick={onCardClick} optionId={currentOptions[2].id} text={currentOptions[2].english} />
+                    <Flashcard onCardClick={onCardClick} optionId={currentOptions[2].id} text={currentOptions[2].english} />
                 </Col>                                        
             </Row>
-            <Row className="pt-5">
+            <Row className="col-sm-4 offset-sm-4 pt-5">
                 <Col>
                     <Flashcard text={currentAnswer.spanish} />
                 </Col>                    
