@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import { Form, Button, Container, Col, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function SignUp() {
     const emailRef = useRef();
@@ -11,6 +12,7 @@ export default function SignUp() {
     const { signup } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -23,6 +25,8 @@ export default function SignUp() {
             setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
+            history.push('/main');
+
         } catch {
             setError('There was an error setting up the account.');
         }
@@ -31,8 +35,8 @@ export default function SignUp() {
 
     return (
         <>
-        <Card>
-            <Card.Body>
+        <Container className="pt-4">
+            <Col className="col-sm-4 offset-sm-4">
                 <h2 className="text-center mb-4">Sign Up</h2>
                 {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={handleSubmit}>
@@ -46,12 +50,12 @@ export default function SignUp() {
                     </Form.Group>  
                     <Form.Group id="password-confirm">
                         <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password-confirm" ref={passwordConfirmRef} required />
+                        <Form.Control type="password" ref={passwordConfirmRef} required />
                     </Form.Group>
-                    <Button disabled={loading} type="submit" className="w-100">Sign Up</Button>                                       
+                    <Button disabled={loading} type="submit" className="w-100 mt-3">Sign Up</Button>                                       
                 </Form>
-            </Card.Body>
-        </Card>
+            </Col>
+        </Container>
         <div className="w-100 text-center mt-2">
             Already have an account?  <Link to="/login">Log in</Link>
         </div>

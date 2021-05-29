@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import {Container, Row, Col } from 'react-bootstrap';
 import Flashcard from './game/Flashcard';
 import db from '../firebase/db';
-import { useAuth } from '../contexts/AuthContext';
 import Timer from './game/Timer';
 import Score from './game/Score';
+import firebase from "firebase/app";
+import "firebase/auth";
+import { Link } from 'react-router-dom';
 
 export default class Game extends Component {
     
@@ -17,17 +19,14 @@ export default class Game extends Component {
             currentOptions: [],
             score: 0,
             phraseList: [],
-            timeLeft: 60
+            timeLeft: 60,
+            notEnoughCards: false
         }
+        this.user = firebase.auth().currentUser;
         this.onCardClick = this.onCardClick.bind(this);
         this.onTimerExpired = this.onTimerExpired.bind(this);
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     //return false;
-    // }
-
-    //currentUser = useAuth();
     answerIndex = -1;
     options = [];
 
@@ -35,7 +34,7 @@ export default class Game extends Component {
         console.log('componentDiddMount');
         //if (!this.state.phraseList || this.state.phraseList.length === 0) {
             db.collection('users')
-                .doc('m@t.com') // TODO: Fix!
+                .doc(this.user.email)
                 .collection('phrases')
                 .get()
                 .then((data) => {
@@ -49,22 +48,22 @@ export default class Game extends Component {
                         });
                     });
                     this.setState({
-                        phraseList: list
+                        phraseList: list,
+                        notEnoughCards: !list || list.length < 3
                     });
-                    this.startGame();
+                    if (list.length >= 3) {
+                        this.startGame();
+                    }
                     this.setState({
                         loading: false
                     });
-                    this.timerRef.current.startTimer();
+                    if (list.length >= 3) {
+                        this.timerRef.current.startTimer();
+                    }
                 })
                 .catch((e) => {
                     console.log(e);
                 });
-        // }
-        // else {
-        //     this.setState({ loading: false })
-        //     this.startGame();
-        // }
 
     }
 
@@ -134,7 +133,15 @@ export default class Game extends Component {
         return (
         <Container>
             {this.state.loading && <span>Loading...</span>}
-            {!this.state.loading && (
+            {!this.state.loading && this.state.notEnoughCards && (
+                <>
+                <div className="pt-5">
+                <h1>¡Ay, caramba!</h1>
+                You don't have enough flashcards to play!  To play the game, make sure to <Link to="/list">create some flashcards</Link>.
+                </div>
+                </>
+            )}
+            {!this.state.loading && !this.state.notEnoughCards && (
                 <>
                     <Row className="pt-4">
                 <Col className="col-sm-9 text-center">
