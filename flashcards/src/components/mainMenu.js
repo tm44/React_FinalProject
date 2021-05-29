@@ -9,7 +9,7 @@ export default function MainMenu() {
     return (
         <Container className="pt-4 text-center">
             <Button onClick={() => history.push('/list')}>Manage your flashcard list</Button><br /><br />
-            <Button onClick={() => history.push('/game')}>Play again</Button>
+            <Button onClick={() => history.push('/game')}>Play game</Button>
         </Container>
     )
 }

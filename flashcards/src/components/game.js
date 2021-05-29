@@ -122,7 +122,7 @@ export default class Game extends Component {
                 this.setupNewQuestions();
             }, 1000);            
         }
-        e.target.style.backgroundColor = isCorrect ? 'green' : 'red';
+        e.target.closest(".card-body").style.backgroundColor = isCorrect ? 'green' : 'red';
     }
 
     onTimerExpired() {

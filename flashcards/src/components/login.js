@@ -46,6 +46,8 @@ export default function Login() {
             </Form>
             <div className="w-100 text-center mt-2">
                 Need an account? <Link to="/signup">Sign up</Link>
+                <br />
+                <small><em>Don't worry - you can use a fake email account!</em></small>
             </div>
             </Col>
         </Container>

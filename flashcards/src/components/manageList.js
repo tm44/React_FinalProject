@@ -5,6 +5,7 @@ import db from '../firebase/db';
 import { useAuth } from '../contexts/AuthContext';
 import AddEditItem from './ListManagement/AddEditItem';
 import { useHistory } from 'react-router-dom';
+import starterPhrases from '../data/starterPhrases';
 
 export default function ManageList() {
 
@@ -27,6 +28,7 @@ export default function ManageList() {
                     }
                 });
                 setList(phrases);
+                setLoading(false);
             });
 
         return unregisterAuthObserver;
@@ -66,13 +68,39 @@ export default function ManageList() {
     }
     
     function handleSave() {
-        if (!selectedItem.id || selectedItem.id === 0) {
+        savePhrase(selectedItem);
+    }
+
+    function savePhrase(phrase) {
+        const isNew = !phrase.id || phrase.id.length === 0;
+        if (!isNew) {
+            db.collection('users')
+                .doc(currentUser.email)
+                .collection('phrases')
+                .doc(phrase.id)
+                .set({
+                    english: phrase.english,
+                    spanish: phrase.spanish
+                }, { merge: true })
+                .then(() => {
+                    setSelectedItem({
+                        id: 0,
+                        english: '',
+                        spanish: ''
+                    });
+                })
+                .catch((e) => {
+                    console.log('an error occurred:');
+                    console.log(e);
+                });
+        }
+        else {
             db.collection('users')
                 .doc(currentUser.email)
                 .collection('phrases')
                 .add({
-                    english: selectedItem.english,
-                    spanish: selectedItem.spanish,
+                    english: phrase.english,
+                    spanish: phrase.spanish,
                     createDate: new Date()
                 })
                 .then(() => {
@@ -85,36 +113,23 @@ export default function ManageList() {
                 .catch((e) => {
                     console.log('an error occurred:');
                     console.log(e);
-                });                
+                });        
         }
-        else {
-        db.collection('users')
-            .doc(currentUser.email)
-            .collection('phrases')
-            .doc(selectedItem.id)
-            .set({
-                english: selectedItem.english,
-                spanish: selectedItem.spanish
-            }, { merge: true })
-            .then(() => {
-                setSelectedItem({
-                    id: 0,
-                    english: '',
-                    spanish: ''
-                });
-            })
-            .catch((e) => {
-                console.log('an error occurred:');
-                console.log(e);
-            });
-        }
+    }
+
+    function importStarterPhrases() {
+        starterPhrases.forEach(s => {
+            savePhrase(s);
+        });
     }
 
     return (
         <div className="pt-3">
             <h1>Manage the list</h1>
             {list.length === 0 && <span>No items yet!  Add at least three items to the list to play the game.</span>}
-
+            {!loading && list.length < 4 && (
+                <div className="pt-3"><Button onClick={importStarterPhrases}>Import Mike's favorite phrases</Button></div>
+            )}
             <Container className="pt-4">
             <Row>
                 <div className="col-sm-8">
@@ -122,9 +137,9 @@ export default function ManageList() {
                     <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>English</th>
-                            <th>Spanish</th>
-                            <th></th>
+                            <th style={{width: "42%"}}>English</th>
+                            <th style={{width: "42%"}}>Spanish</th>
+                            <th style={{width: "16%"}}></th>
                         </tr>
                     </thead>
                     <tbody>
