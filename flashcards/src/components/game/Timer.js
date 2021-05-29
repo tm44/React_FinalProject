@@ -3,12 +3,12 @@ import React from 'react';
 class Timer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { timeLeft: 10 }
+        this.state = { timeLeft: 1000 }
     }
 
     componentDidMount() {
         this.setState({
-            timeLeft: 10
+            timeLeft: 1000
         });
     }
 
