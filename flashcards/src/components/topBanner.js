@@ -1,7 +1,7 @@
 import React from 'react';
 import WeatherContainer from './topBanner/WeatherContainer';
-import LogOut from './LogOut';
-import CurrentUser from './CurrentUser';
+import LogOut from './topBanner/LogOut';
+import CurrentUser from './topBanner/CurrentUser';
 
 export default function TopBanner() {
 
@@ -12,23 +12,14 @@ export default function TopBanner() {
             <div className="row">
                 <div className="col-sm-8">
                     <h1>Spanish Flashcards</h1>
-                    <p className="text-yellow">The greatest flashcard game you will ever play.  Well, kind of.</p>
+                    <p className="text-yellow mb-2">The greatest flashcard game you will ever play.  Well, kind of.</p>
+                    <CurrentUser /><br />
+                    <LogOut />
                 </div>
                 <div className="col-sm-4">
-                    {/* <div className="row">
-                        <div className="col-sm-4" style={{marginTop: "25px"}}>
-                            City list
-                        </div>
-                        <div className="col-sm-8">
-                            <div className="row"> */}
-                                <WeatherContainer />
-                            {/* </div>
-                        </div>
-                    </div> */}
+                    <WeatherContainer />
                 </div>
-            
-            <LogOut />
-            <CurrentUser />
+
             </div>
         </div>
         <div className="container row-red"></div>

@@ -110,7 +110,10 @@ export default class Game extends Component {
         }
     }   
     
-    onCardClick(e, isCorrect){
+    onCardClick(e, isCorrect, isAnswerCard = false){
+        if (isAnswerCard) {
+            return;
+        }
         if (isCorrect) {
             this.setState({
                 score: this.state.score + 1
@@ -181,7 +184,11 @@ export default class Game extends Component {
             </Row>
             <Row className="col-sm-4 offset-sm-4 pt-5">
                 <Col>
-                    <Flashcard text={this.state.currentAnswer.spanish} />
+                    <Flashcard
+                        text={this.state.currentAnswer.spanish}
+                        onCardClick={this.onCardClick}
+                        isAnswerCard={true}
+                    />
                 </Col>                    
             </Row>
             </>

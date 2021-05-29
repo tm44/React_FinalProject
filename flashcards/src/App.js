@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import SignUp from './components/signUp';
-import MainMenu from './components/mainMenu';
+import MainMenu from './components/MainMenu';
 import Game from './components/Game';
 import GameOver from './components/GameOver';
 import ManageList from './components/ManageList';
