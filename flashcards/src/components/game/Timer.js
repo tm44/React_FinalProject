@@ -3,7 +3,7 @@ import React from 'react';
 class Timer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { timeLeft: 5 }
+        this.state = { timeLeft: 12 }
     }
 
     componentDidMount() {
@@ -23,7 +23,7 @@ class Timer extends React.Component {
 
     render() {
         return (
-            <span id="timer" style={{borderColor: "green"}}>0:{this.state.timeLeft}</span>
+            <span id="timer" style={{borderColor: "green"}}>0:{this.state.timeLeft < 10 ? "0" : ""}{this.state.timeLeft}</span>
         )
     }
 }
