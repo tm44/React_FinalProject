@@ -3,7 +3,7 @@ import './App.css';
 import SignUp from './components/signUp';
 import MainMenu from './components/mainMenu';
 import Game from './components/Game';
-import GameOver from './components/gameOver';
+import GameOver from './components/GameOver';
 import ManageList from './components/ManageList';
 import TopBanner from './components/TopBanner';
 import Container from 'react-bootstrap/Container';
@@ -18,9 +18,9 @@ function App() {
     <AuthProvider>
       {/* <Container className="d-flex align-items-center justify-content-center" style={{minHeight: '100vh'}}> */}
         <TopBanner />
-        <Router>
+        
           <Container>
-            <Switch>
+          <Router>
               <PrivateRoute exact path="/" component={MainMenu} />
               <Route path="/signup" component={SignUp} />
               <Route path="/login" component={Login} />
@@ -28,9 +28,9 @@ function App() {
               <PrivateRoute path="/game" component={Game} />
               <PrivateRoute path="/gameover" component={GameOver} />
               <PrivateRoute path="/list" component={ManageList} />
-            </Switch>
+              </Router>
             </Container>
-        </Router>
+        
         {/* </Container> */}
         </AuthProvider> 
   );
