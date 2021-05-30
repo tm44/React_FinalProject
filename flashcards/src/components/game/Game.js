@@ -153,7 +153,7 @@ export default class Game extends Component {
 
         </Row>
             <Row className="pt-4">
-                <Col>
+                <Col className="col-xs-4">
                     <Flashcard
                         isCorrect={this.state.currentOptions[0].id === this.state.currentAnswer.id}
                         onCardClick={this.onCardClick} 
@@ -162,7 +162,7 @@ export default class Game extends Component {
                     />
                 </Col>
                 
-                <Col>
+                <Col className="col-xs-4">
                     <Flashcard
                             isCorrect={this.state.currentOptions[1].id === this.state.currentAnswer.id}
                             onCardClick={this.onCardClick} 
@@ -170,7 +170,7 @@ export default class Game extends Component {
                             text={this.state.currentOptions[1].english} 
                         />
                 </Col>
-                <Col>
+                <Col className="col-xs-4">
                     <Flashcard
                             isCorrect={this.state.currentOptions[2].id === this.state.currentAnswer.id}
                             onCardClick={this.onCardClick} 

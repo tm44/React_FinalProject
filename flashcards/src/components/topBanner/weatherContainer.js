@@ -1,4 +1,5 @@
 import React from 'react';
+import {Container, Col, Row } from 'react-bootstrap';
 
 class WeatherContainer extends React.Component {
 
@@ -41,8 +42,8 @@ class WeatherContainer extends React.Component {
         <>
         {this.state.loading && <span>Loading weather...</span>}
         {!this.state.loading && (
-            <div className="row">
-                <div className="col-sm-4" style={{marginTop: "25px"}}>
+            <Row>
+                <Col xs={5} style={{marginTop: "25px"}}>
                     <select onChange={this.handleCityChange}>
                         <option value="Barcelona">Barcelona</option>
                         <option value="Madrid">Madrid</option>
@@ -53,20 +54,20 @@ class WeatherContainer extends React.Component {
                         <option value="Seville">Seville</option>
                         <option value="Zaragoza">Zaragoza</option>
                     </select>
-                </div>
-                <div className="col-sm-8">
-                    <div className="row">
-                    <div className="col-sm-3" style={{marginTop: "25px"}}>
+                </Col>
+                <Col xs={7}>
+                    <Row>
+                    <Col xs={6} style={{marginTop: "25px"}}>
                         <span id="weather-temp">{this.state.weather.main.temp}°</span>
                         <br />
                         <span id="weather-description">{this.state.weather.weather[0].main}</span>
-                    </div>
-                    <div className="col-sm-9">
+                    </Col>
+                    <Col xs={6}>
                         <img id="weather-icon" alt="Current conditions" src={"http://openweathermap.org/img/wn/" + this.state.weather.weather[0].icon + "@2x.png"} />
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </Col>
+                    </Row>
+            </Col>
+            </Row>
         )}
 
         </>

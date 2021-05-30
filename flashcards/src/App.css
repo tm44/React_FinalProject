@@ -1,6 +1,6 @@
 .card {
     background-image: url("http://media.flashcardmachine.com/images/preview_card_back.gif");
-    height: 130px;
+    min-height: 130px;
     cursor:pointer
   }
   .row-red {
