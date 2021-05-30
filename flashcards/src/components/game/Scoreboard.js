@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import Moment from 'react-moment';
 
 export default function Scoreboard({scores}) {
     return (
@@ -8,7 +9,7 @@ export default function Scoreboard({scores}) {
             <span>No scores recorded yet.</span>
         )}
         {scores && scores.length > 0 && (
-            <Table>
+            <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
                         <th>Score</th>
@@ -18,9 +19,11 @@ export default function Scoreboard({scores}) {
                 <tbody>
                     {scores.map(s => {
                         return (
-                            <tr>
+                            <tr key={s.id}>
                                 <td>{s.score}</td>
-                                <td>{s.createDate}</td>
+                                <td>
+                                    <Moment format="M/D/YY h:mm:ss A">{s.createDate}</Moment>
+                                </td>
                             </tr>
                         )
                     })}
