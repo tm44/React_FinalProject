@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Col, Row, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 
 export default function AddEditItem({english, spanish, onChangeEnglish, onChangeSpanish, onSave, disabled, id}) {
 

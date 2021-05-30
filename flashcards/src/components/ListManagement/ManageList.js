@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import ListItem from './ListManagement/ListItem';
+import ListItem from './ListItem';
 import { Table, Container, Row, Button, Col } from 'react-bootstrap';
-import db from '../firebase/db';
-import { useAuth } from '../contexts/AuthContext';
-import AddEditItem from './ListManagement/AddEditItem';
+import db from '../../firebase/db';
+import { useAuth } from '../../contexts/AuthContext';
+import AddEditItem from './AddEditItem';
 import { useHistory } from 'react-router-dom';
-import starterPhrases from '../data/starterPhrases';
+import starterPhrases from '../../data/starterPhrases';
 
 export default function ManageList() {
 

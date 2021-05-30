@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import db from '../firebase/db';
-import Scoreboard from './game/Scoreboard';
+import db from '../../firebase/db';
+import Scoreboard from './Scoreboard';
 
 export default function GameOver() {
     const { location } = useHistory();
@@ -13,7 +13,7 @@ export default function GameOver() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        db.collection('users')
+        const unregisterAuthObserver = db.collection('users')
                 .doc(currentUser.email)
                 .collection('scores')
                 .add({
@@ -26,7 +26,7 @@ export default function GameOver() {
                     console.log(e);
                 });        
 
-        //return unregisterAuthObserver;
+        return unregisterAuthObserver;
     },[]);
 
     function showScores() {

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {Container, Row, Col } from 'react-bootstrap';
-import Flashcard from './game/Flashcard';
-import db from '../firebase/db';
-import Timer from './game/Timer';
-import Score from './game/Score';
+import Flashcard from './Flashcard';
+import db from '../../firebase/db';
+import Timer from './Timer';
+import Score from './Score';
 import firebase from "firebase/app";
 import "firebase/auth";
 import { Link } from 'react-router-dom';
@@ -31,40 +31,37 @@ export default class Game extends Component {
     options = [];
 
     componentDidMount() {
-        console.log('componentDiddMount');
-        //if (!this.state.phraseList || this.state.phraseList.length === 0) {
-            db.collection('users')
-                .doc(this.user.email)
-                .collection('phrases')
-                .get()
-                .then((data) => {
-                    const list = [];
-                    data.forEach((doc) => {
-                        const item = doc.data();
-                        list.push({
-                            spanish: item.spanish,
-                            english: item.english,
-                            id: doc.id
-                        });
+        db.collection('users')
+            .doc(this.user.email)
+            .collection('phrases')
+            .get()
+            .then((data) => {
+                const list = [];
+                data.forEach((doc) => {
+                    const item = doc.data();
+                    list.push({
+                        spanish: item.spanish,
+                        english: item.english,
+                        id: doc.id
                     });
-                    this.setState({
-                        phraseList: list,
-                        notEnoughCards: !list || list.length < 3
-                    });
-                    if (list.length >= 3) {
-                        this.startGame();
-                    }
-                    this.setState({
-                        loading: false
-                    });
-                    if (list.length >= 3) {
-                        this.timerRef.current.startTimer();
-                    }
-                })
-                .catch((e) => {
-                    console.log(e);
                 });
-
+                this.setState({
+                    phraseList: list,
+                    notEnoughCards: !list || list.length < 3
+                });
+                if (list.length >= 3) {
+                    this.startGame();
+                }
+                this.setState({
+                    loading: false
+                });
+                if (list.length >= 3) {
+                    this.timerRef.current.startTimer();
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 
     startGame() {

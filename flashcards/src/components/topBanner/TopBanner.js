@@ -1,7 +1,7 @@
 import React from 'react';
-import WeatherContainer from './topBanner/WeatherContainer';
-import LogOut from './topBanner/LogOut';
-import CurrentUser from './topBanner/CurrentUser';
+import WeatherContainer from './WeatherContainer';
+import LogOut from './LogOut';
+import CurrentUser from './CurrentUser';
 
 export default function TopBanner() {
 
