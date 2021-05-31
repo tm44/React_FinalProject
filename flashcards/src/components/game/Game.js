@@ -7,6 +7,7 @@ import Score from './Score';
 import firebase from "firebase/app";
 import "firebase/auth";
 import { Link } from 'react-router-dom';
+import flag from '../../assets/flag.png';
 
 export default class Game extends Component {
     
@@ -152,6 +153,12 @@ export default class Game extends Component {
             </Col>
 
         </Row>
+            <Row className="pt-3">
+                <Col>
+                    <p>Choose the correct transaction from the card below.</p>
+                    <h3><img src={flag} alt="Spanish phrase:" /> {this.state.currentAnswer.spanish}</h3>
+                </Col>
+            </Row>
             <Row className="pt-4">
                 <Col className="col-xs-4">
                     <Flashcard
@@ -178,15 +185,6 @@ export default class Game extends Component {
                             text={this.state.currentOptions[2].english}
                         />                
                 </Col>                                        
-            </Row>
-            <Row className="col-sm-4 offset-sm-4 pt-5">
-                <Col>
-                    <Flashcard
-                        text={this.state.currentAnswer.spanish}
-                        onCardClick={this.onCardClick}
-                        isAnswerCard={true}
-                    />
-                </Col>                    
             </Row>
             </>
             )}

@@ -73,6 +73,7 @@ starterPhrases.push(new Entry("To throw in the towel", "Tirar la toalla"));
 starterPhrases.push(new Entry("To leave behind and start over", "Hacer borrón y cuenta nueva"));
 starterPhrases.push(new Entry("Be careful.  This is the wrong moment for that.", "El horno no está para bollos"));
 starterPhrases.push(new Entry("Rob Peter to pay Paul", "Desvistir un santo para vestir otro"));
+starterPhrases.push(new Entry("At random", "A voleo"));
 
 // ñ ó á ¡ É é
 
