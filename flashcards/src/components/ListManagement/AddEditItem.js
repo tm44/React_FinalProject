@@ -15,7 +15,7 @@ export default function AddEditItem({english, spanish, onChangeEnglish, onChange
                     <Form.Control name="spanish" onChange={onChangeSpanish} type="text" value={spanish || ''} />
                 </Form.Group>
                 <Form.Group className="pt-3">
-                    <Button disabled={disabled} onClick={onSave} className="w-100">Save</Button>
+                    <Button disabled={disabled} onClick={onSave} className="w-100 mb-5">Save</Button>
                 </Form.Group>
             </Form>
         </Container>

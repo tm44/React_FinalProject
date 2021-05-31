@@ -184,14 +184,6 @@ export default function ManageList() {
                     />
                 </div>
             </Row>
-            {list.length >= 3 && (
-            <Row>
-                <Col className="col-sm-2 offset-sm-3">
-                    <Button onClick={() => history.push('/game')}>Play Game!</Button>
-                </Col>
-            </Row>
-            )}
-
         </Container>
         </div>
     );
