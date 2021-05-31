@@ -126,6 +126,13 @@ export default function ManageList() {
     return (
         <div className="pt-3">
             <h1>Manage the list</h1>
+            {list.length > 3 && (
+            <Row>
+                <Col className="pt-2">
+                    <Button onClick={() => history.push('/game')}>Play Game!</Button>
+                </Col>
+            </Row>                
+            )}
             {list.length === 0 && <span>No items yet!  Add at least three items to the list to play the game.</span>}
             {!loading && list.length < 4 && (
                 <div className="pt-3"><Button onClick={importStarterPhrases}>Import Mike's favorite phrases</Button></div>
