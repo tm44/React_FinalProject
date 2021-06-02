@@ -28,7 +28,7 @@ export default function SignUp() {
             history.push('/main');
 
         } catch {
-            setError('There was an error setting up the account.');
+            setError('Error setting up the account. Make sure your password is at least 6 characters.');
         }
         setLoading(false);
     }
