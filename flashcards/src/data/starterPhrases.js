@@ -74,6 +74,10 @@ starterPhrases.push(new Entry("To leave behind and start over", "Hacer borrón y
 starterPhrases.push(new Entry("Be careful.  This is the wrong moment for that.", "El horno no está para bollos"));
 starterPhrases.push(new Entry("Rob Peter to pay Paul", "Desvistir un santo para vestir otro"));
 starterPhrases.push(new Entry("At random", "A voleo"));
+starterPhrases.push(new Entry("I could eat a horse", "Estoy canino"));
+starterPhrases.push(new Entry("Difficult / rebellious teenage years", "La edad del pavo"));
+starterPhrases.push(new Entry("She is a continuously rebellious teenager", "Tiene un pavazo"));
+starterPhrases.push(new Entry("To be distracted", "Estar empanado"));
 
 // ñ ó á ¡ É é
 
